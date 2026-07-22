@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Circular Maze</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#faf9f5;--sur:#ffffff;--dark:#141413;--mid:#b0aea5;--lg:#e8e6dc;--or:#d97757;--safe-bottom:env(safe-area-inset-bottom,0px)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--dark)}
+html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',sans-serif;color:var(--dark)}
 
 /* ── Main layout: maze top, controls bottom ── */
 #app{display:flex;flex-direction:column;height:100%;height:100dvh}
@@ -28,7 +28,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'DM Sans'
 
 /* ── Top bar ── */
 #topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 0;flex-shrink:0}
-#topbar h1{font-family:'DM Serif Display',serif;font-size:17px;font-weight:400}
+#topbar h1{font-family:'Inter',sans-serif;font-size:17px;font-weight:400}
 .icon-btn{background:none;border:none;cursor:pointer;padding:6px;border-radius:8px;font-size:20px;color:var(--dark);transition:background .15s}
 .icon-btn:hover{background:var(--lg)}
 .topbar-btns{display:flex;gap:4px}
@@ -38,30 +38,30 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'DM Sans'
 #drawer-bg.open{opacity:1;pointer-events:all}
 #drawer{position:fixed;bottom:0;left:0;right:0;background:var(--sur);border-radius:18px 18px 0 0;z-index:11;padding:16px 20px calc(20px + var(--safe-bottom));max-height:80vh;overflow-y:auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,0,.67,0)}
 #drawer.open{transform:translateY(0)}
-#drawer h2{font-family:'DM Serif Display',serif;font-size:16px;font-weight:400;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
+#drawer h2{font-family:'Inter',sans-serif;font-size:16px;font-weight:400;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
 #drawer h2 button{background:none;border:none;font-size:22px;cursor:pointer;color:var(--mid);padding:0}
 
 .section{margin-bottom:20px}
 .stitle{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .stitle::before{content:'';width:10px;height:2px;background:var(--or);border-radius:1px}
-.seed-box{width:100%;background:var(--bg);border:1.5px solid var(--lg);border-radius:8px;padding:10px;font-family:'DM Mono',monospace;font-size:15px;text-align:center;color:var(--dark);margin-bottom:8px;transition:border-color .2s}
+.seed-box{width:100%;background:var(--bg);border:1.5px solid var(--lg);border-radius:8px;padding:10px;font-family:'Courier Prime',monospace;font-size:15px;text-align:center;color:var(--dark);margin-bottom:8px;transition:border-color .2s}
 .seed-box:focus{outline:none;border-color:var(--or)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px}
 .g1{margin-bottom:7px}
-button.btn{display:block;width:100%;padding:10px 12px;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;background:var(--lg);color:var(--dark);transition:all .15s;touch-action:manipulation}
+button.btn{display:block;width:100%;padding:10px 12px;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;background:var(--lg);color:var(--dark);transition:all .15s;touch-action:manipulation}
 button.btn:hover,button.btn:active{background:var(--mid);color:#fff}
 button.btn.accent{background:var(--or);color:#fff}
 button.btn.accent:active{background:#c46640}
 .ctrl{margin-bottom:14px}
 .ctrl label{display:flex;justify-content:space-between;font-size:13px;font-weight:500;margin-bottom:7px}
-.ctrl label span{font-family:'DM Mono',monospace;color:var(--mid);font-size:12px}
+.ctrl label span{font-family:'Courier Prime',monospace;color:var(--mid);font-size:12px}
 input[type=range]{width:100%;height:4px;-webkit-appearance:none;background:var(--lg);border-radius:2px;outline:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--or);border-radius:50%;cursor:pointer}
 input[type=range]::-moz-range-thumb{width:20px;height:20px;background:var(--or);border-radius:50%;border:none;cursor:pointer}
 .color-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .color-row label{font-size:13px;flex:1}
 input[type=color]{width:32px;height:32px;border:none;padding:0;border-radius:6px;cursor:pointer;background:none}
-.chex{font-family:'DM Mono',monospace;font-size:11px;color:var(--mid);min-width:54px}
+.chex{font-family:'Courier Prime',monospace;font-size:11px;color:var(--mid);min-width:54px}
 .trow{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .trow>label:first-child{font-size:13px;font-weight:500}
 .tog{position:relative;width:38px;height:22px}
@@ -72,7 +72,7 @@ input[type=color]{width:32px;height:32px;border:none;padding:0;border-radius:6px
 .tog input:checked+.tslider::before{transform:translateX(16px)}
 
 .diff-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:4px}
-.diff-btn{padding:10px 4px;border:2px solid var(--lg);border-radius:10px;background:var(--bg);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;cursor:pointer;text-align:center;line-height:1.4;transition:all .15s;color:var(--dark)}
+.diff-btn{padding:10px 4px;border:2px solid var(--lg);border-radius:10px;background:var(--bg);font-family:'Inter',sans-serif;font-size:11px;font-weight:600;cursor:pointer;text-align:center;line-height:1.4;transition:all .15s;color:var(--dark)}
 .diff-btn:active{opacity:.7}
 .diff-btn.active{border-color:var(--or);background:var(--or);color:#fff}
 .diff-btn .emoji{font-size:18px;display:block;margin-bottom:3px}
