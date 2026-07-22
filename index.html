@@ -640,7 +640,8 @@ function resetAll(){
     document.getElementById('c-bg').value=params.bgColor;document.getElementById('cv-bg').textContent=params.bgColor;document.body.style.background=params.bgColor;document.getElementById('app').style.background=params.bgColor;
     document.getElementById('c-wall').value=params.wallColor;document.getElementById('cv-wall').textContent=params.wallColor;
     document.getElementById('c-path').value=params.pathColor;document.getElementById('cv-path').textContent=params.pathColor;
-    setDiff(params.difficulty);
+    ['easy','medium','hard'].forEach(x=>document.getElementById('diff-'+x).classList.toggle('active',x===params.difficulty));
+    inst.rebuild();
 }
 </script>
 </body>
