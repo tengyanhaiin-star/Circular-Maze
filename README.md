@@ -68,16 +68,12 @@ Open the settings drawer with the ⚙️ button (top right).
 - **Arc rendering** — all arcs are drawn as polylines (`beginShape/vertex`) rather than `p5.arc()`, avoiding fill artifacts.
 - **Trail and solution curves** — same-ring segments are drawn as circular arcs at the ring's mid-radius; cross-ring segments are straight radial lines.
 - **Mobile** — touch events use `touchstart` + `preventDefault` to avoid double-firing and iOS fullscreen gestures. Layout uses `100dvh` and `safe-area-inset-bottom` for iPhone notch/home-bar compatibility.
-- **Fonts** — DM Serif Display, DM Sans, DM Mono (Google Fonts).
+- **Fonts** — Inter, Courier Prime (Google Fonts).
 
 ---
 
 ## Quickstart
 
-Download `circular_maze.html` and open it in any browser. No server needed.
+Open [Circular Maze](https://tengyanhaiin-star.github.io/Circular-Maze/) in any browser. No server needed.
 
-```
-open circular_maze.html
-```
-
-To share a specific maze, note the seed number and send it alongside the file.
+To share a specific maze, note the seed number and send it.
