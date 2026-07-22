@@ -149,10 +149,6 @@ input[type=color]{width:32px;height:32px;border:none;padding:0;border-radius:6px
       <label>Sectors <span id="lv-inner">12</span></label>
       <input type="range" id="sl-inner" min="4" max="30" step="2" value="12" oninput="sp('innerCells',+this.value,'lv-inner')">
     </div>
-    <div class="ctrl">
-      <label>Wall Width <span id="lv-ww">1</span></label>
-      <input type="range" id="sl-ww" min="0.5" max="2" step="0.5" value="1" oninput="sp('wallWeight',+this.value,'lv-ww')">
-    </div>
     <div class="trow">
       <label>Show Solution</label>
       <label class="tog"><input type="checkbox" id="chk-sol" onchange="st('showSolution',this.checked)"><span class="tslider"></span></label>
@@ -187,8 +183,16 @@ function mkRng(seed){
 }
 
 // ── Params ─────────────────────────────────────────────────────
-let params={seed:12345,rings:9,innerCells:12,wallWeight:1,showSolution:false,showTrail:true,bgColor:'#faf9f5',wallColor:'#1a1917',pathColor:'#d97757',difficulty:'easy'};
+let params={seed:12345,rings:9,innerCells:12,showSolution:false,showTrail:true,bgColor:'#faf9f5',wallColor:'#1a1917',pathColor:'#d97757',difficulty:'easy'};
 const DEF={...params};
+
+function wallWeight(){
+    const t=params.rings+params.innerCells;
+    if(t<=12) return 2;
+    if(t<=24) return 1.5;
+    if(t<=36) return 1;
+    return 0.5;
+}
 
 // ── Player ─────────────────────────────────────────────────────
 let player={hub:true}, trail=[], visited=new Set(), won=false, steps=0;
@@ -532,7 +536,7 @@ const sketch=p=>{
         }
 
         // ── Walls (use wallVis for wider wall visibility) ──
-        p.noFill();p.stroke(wR,wG,wB);p.strokeWeight(params.wallWeight);p.strokeCap(p.ROUND);
+        p.noFill();p.stroke(wR,wG,wB);p.strokeWeight(wallWeight());p.strokeCap(p.ROUND);
         for(let r=0;r<rings;r++){
             const n=counts[r],ri=(r===0)?hubR:radii[r],ro=radii[r+1];
             for(let s=0;s<n;s++){
@@ -631,7 +635,6 @@ function resetAll(){
     params={...DEF};sync();
     document.getElementById('sl-rings').value=params.rings;document.getElementById('lv-rings').textContent=params.rings;
     document.getElementById('sl-inner').value=params.innerCells;document.getElementById('lv-inner').textContent=params.innerCells;
-    document.getElementById('sl-ww').value=params.wallWeight;document.getElementById('lv-ww').textContent=params.wallWeight;
     document.getElementById('chk-sol').checked=params.showSolution;
     document.getElementById('chk-trail').checked=params.showTrail;
     document.getElementById('c-bg').value=params.bgColor;document.getElementById('cv-bg').textContent=params.bgColor;document.body.style.background=params.bgColor;document.getElementById('app').style.background=params.bgColor;
