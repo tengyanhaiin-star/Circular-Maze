@@ -53,7 +53,6 @@ Open the settings drawer with the ⚙️ button (top right).
 | **Seed** | Integer seed for the PRNG. The same seed always produces the same maze. Use Previous / Next to step through seeds, or randomize. |
 | **Rings** | Number of concentric rings (3–24). More rings = larger, harder maze. |
 | **Sectors** | Number of angular divisions per ring (4–30, even numbers). More sectors = denser maze. |
-| **Wall Width** | Stroke weight of maze walls (0.5–2). Thinner walls recommended for dense mazes. |
 | **Show Solution** | Highlights the shortest path from center to exit (BFS). Hidden in fogged areas. |
 | **Show Trail** | Draws a line through every cell you have visited, in order. Hidden in fogged areas. |
 | **Background / Walls / Player** | Color pickers for full visual customization. |
@@ -77,3 +76,7 @@ Open the settings drawer with the ⚙️ button (top right).
 Open [Circular Maze](https://tengyanhaiin-star.github.io/Circular-Maze/) in any browser. No server needed.
 
 To share a specific maze, note the seed number and send it.
+
+## License
+
+MIT — see [LICENSE](LICENSE) for details.
