@@ -73,7 +73,7 @@ Open the settings drawer with the ⚙️ button (top right).
 
 ## Quickstart
 
-Open [Circular Maze](https://tengyanhaiin-star.github.io/Circular-Maze/) in any browser. No server needed.
+Open [Circular Maze](https://tengyanhaiin-star.github.io/Circular-Maze/) in any browser, no server needed.
 
 To share a specific maze, note the seed number and send it.
 
