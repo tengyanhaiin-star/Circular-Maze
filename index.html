@@ -611,8 +611,7 @@ const sketch=p=>{
         // ── Player ──
         {
             const[px,py]=posToXY(player,counts,radii,hubR,cx,cy);
-            const ringH=player.hub?hubR*0.55:(radii[player.r+1]-radii[player.r])*0.38;
-            const ballR=Math.max(2,hubR*10/n);
+            const ballR=Math.max(2, hubR*5/params.innerCells);
             p.noStroke();
             p.fill(pR,pG,pB,40);p.circle(px,py,ballR*4);
             p.fill(pR,pG,pB,80);p.circle(px,py,ballR*2.8);
