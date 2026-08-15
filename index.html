@@ -6,11 +6,11 @@
 <meta name="theme-color" id="theme-color" content="#faf9f5">
 <title>Circular Maze</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#faf9f5;--sur:#ffffff;--dark:#141413;--mid:#b0aea5;--lg:#e8e6dc;--or:#d97757;--safe-bottom:env(safe-area-inset-bottom,0px)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',sans-serif;color:var(--dark)}
+html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Roboto',sans-serif;color:var(--dark)}
 
 /* ── Main layout: maze top, controls bottom ── */
 #app{display:flex;flex-direction:column;height:100%;height:100dvh}
@@ -26,7 +26,6 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',s
 #dpad button{width:56px;height:56px;padding:0;font-size:22px;border:none;border-radius:12px;background:var(--lg);color:var(--dark);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .1s;-webkit-user-select:none;touch-action:manipulation}
 #dpad button:active,#dpad button.pressed{background:var(--or);color:#fff}
 #dpad .center{display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mid)}
-.hint{font-size:13px}
 
 /* ── Landscape: dpad moves to the right, maze fills left ── */
 @media (orientation:landscape) and (max-height:600px) {
@@ -44,40 +43,37 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',s
 
 /* ── Top bar ── */
 #topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 0;flex-shrink:0}
-#topbar h1{font-family:'Inter',sans-serif;font-size:17px;font-weight:400}
+#topbar h1{font-family:'Roboto',sans-serif;font-size:17px;font-weight:400}
 .icon-btn{background:none;border:none;cursor:pointer;padding:6px;border-radius:8px;font-size:20px;color:var(--dark);transition:background .15s}
 .icon-btn:hover{background:var(--lg)}
 .topbar-btns{display:flex;gap:4px}
 
 /* ── Settings drawer ── */
-//#drawer-bg{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:10;opacity:0;pointer-events:none;transition:opacity .25s}
-//#drawer-bg.open{opacity:1;pointer-events:all}
+#drawer-bg{position:fixed;inset:0;background:transparent;z-index:10;opacity:0;pointer-events:none;transition:opacity .25s}
+#drawer-bg.open{opacity:1;pointer-events:all}
 #drawer{position:fixed;bottom:0;left:0;right:0;background:var(--sur);border-radius:18px 18px 0 0;z-index:11;padding:16px 20px calc(20px + var(--safe-bottom));max-height:80vh;overflow-y:auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,0,.67,0)}
 #drawer.open{transform:translateY(0)}
-#drawer h2{font-family:'Inter',sans-serif;font-size:16px;font-weight:400;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
+#drawer h2{font-family:'Roboto',sans-serif;font-size:16px;font-weight:400;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
 #drawer h2 button{background:none;border:none;font-size:22px;cursor:pointer;color:var(--mid);padding:0}
 
 .section{margin-bottom:20px}
 .stitle{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .stitle::before{content:'';width:10px;height:2px;background:var(--or);border-radius:1px}
-.seed-box{width:100%;background:var(--bg);border:1.5px solid var(--lg);border-radius:8px;padding:10px;font-family:'Courier Prime',monospace;font-size:15px;text-align:center;color:var(--dark);margin-bottom:8px;transition:border-color .2s}
+.seed-box{width:100%;background:var(--bg);border:1.5px solid var(--lg);border-radius:8px;padding:10px;font-family:'Roboto',sans-serif;font-size:15px;text-align:center;color:var(--dark);margin-bottom:8px;transition:border-color .2s}
 .seed-box:focus{outline:none;border-color:var(--or)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px}
 .g1{margin-bottom:7px}
-button.btn{display:block;width:100%;padding:10px 12px;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;background:var(--lg);color:var(--dark);transition:all .15s;touch-action:manipulation}
+button.btn{display:block;width:100%;padding:10px 12px;border:none;border-radius:8px;font-family:'Roboto',sans-serif;font-size:13px;font-weight:500;cursor:pointer;background:var(--lg);color:var(--dark);transition:all .15s;touch-action:manipulation}
 button.btn:hover,button.btn:active{background:var(--mid);color:#fff}
 button.btn.accent{background:var(--or);color:#fff}
 button.btn.accent:active{background:#c46640}
 .ctrl{margin-bottom:14px}
 .ctrl label{display:flex;justify-content:space-between;font-size:13px;font-weight:500;margin-bottom:7px}
-.ctrl label span{font-family:'Courier Prime',monospace;color:var(--mid);font-size:12px}
+.ctrl label span{font-family:'Roboto',sans-serif;color:var(--mid);font-size:12px}
 input[type=range]{width:100%;height:4px;-webkit-appearance:none;background:var(--lg);border-radius:2px;outline:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--or);border-radius:50%;cursor:pointer}
 input[type=range]::-moz-range-thumb{width:20px;height:20px;background:var(--or);border-radius:50%;border:none;cursor:pointer}
-.color-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.color-row label{font-size:13px;flex:1}
-input[type=color]{width:32px;height:32px;border:none;padding:0;border-radius:6px;cursor:pointer;background:none}
-.chex{font-family:'Courier Prime',monospace;font-size:11px;color:var(--mid);min-width:54px}
+
 .trow{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .trow>label:first-child{font-size:13px;font-weight:500}
 .tog{position:relative;width:38px;height:22px}
@@ -88,10 +84,11 @@ input[type=color]{width:32px;height:32px;border:none;padding:0;border-radius:6px
 .tog input:checked+.tslider::before{transform:translateX(16px)}
 
 .diff-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:4px}
-.diff-btn{padding:10px 4px;border:2px solid var(--lg);border-radius:10px;background:var(--bg);font-family:'Inter',sans-serif;font-size:11px;font-weight:600;cursor:pointer;text-align:center;line-height:1.4;transition:all .15s;color:var(--dark)}
+.diff-btn{padding:10px 4px;border:2px solid var(--lg);border-radius:10px;background:var(--bg);font-family:'Roboto',sans-serif;font-size:11px;font-weight:600;cursor:pointer;text-align:center;line-height:1.4;transition:all .15s;color:var(--dark)}
 .diff-btn:active{opacity:.7}
 .diff-btn.active{border-color:var(--or);background:var(--or);color:#fff}
 .diff-btn .emoji{font-size:18px;display:block;margin-bottom:3px}
+.hint{font-size:13px;color:var(--mid);text-align:center}
 </style>
 </head>
 <body>
@@ -176,13 +173,6 @@ input[type=color]{width:32px;height:32px;border:none;padding:0;border-radius:6px
   </div>
 
   <div class="section">
-    <div class="stitle">Colors</div>
-    <div class="color-row"><label>Background</label><input type="color" id="c-bg" value="#faf9f5" onchange="sc('bgColor',this.value,'cv-bg')"><span class="chex" id="cv-bg">#faf9f5</span></div>
-    <div class="color-row"><label>Walls</label><input type="color" id="c-wall" value="#1a1917" onchange="sc('wallColor',this.value,'cv-wall')"><span class="chex" id="cv-wall">#1a1917</span></div>
-    <div class="color-row"><label>Player / Path</label><input type="color" id="c-path" value="#d97757" onchange="sc('pathColor',this.value,'cv-path')"><span class="chex" id="cv-path">#d97757</span></div>
-  </div>
-
-  <div class="section">
     <div class="stitle">Actions</div>
     <div class="g2" style="margin-bottom:8px">
       <button class="btn" onclick="resetPlayer();closeDrawer()">Restart</button>
@@ -199,7 +189,8 @@ function mkRng(seed){
 }
 
 // ── Params ─────────────────────────────────────────────────────
-let params={seed:12345,rings:9,innerCells:12,showSolution:false,showTrail:true,bgColor:'#faf9f5',wallColor:'#1a1917',pathColor:'#d97757',difficulty:'easy'};
+const BG='#faf9f5', WALL='#1a1917', PATH='#d97757';
+let params={seed:12345,rings:9,innerCells:12,showSolution:false,showTrail:true,difficulty:'easy'};
 const DEF={...params};
 
 function wallWeight(){
@@ -445,9 +436,9 @@ const sketch=p=>{
         const maxR=Math.min(cx,cy)-8;
         const radii=getRadii(rings,maxR);
         const hubR=radii[1]*0.42;
-        const[bR,bG,bB]=hex3(params.bgColor);
-        const[wR,wG,wB]=hex3(params.wallColor);
-        const[pR,pG,pB]=hex3(params.pathColor);
+        const[bR,bG,bB]=hex3(BG);
+        const[wR,wG,wB]=hex3(WALL);
+        const[pR,pG,pB]=hex3(PATH);
         const diff=params.difficulty;
 
         // Compute visible cells
@@ -639,8 +630,8 @@ document.addEventListener('gestureend',    e => e.preventDefault());
 document.addEventListener('touchmove', e => { if(e.touches.length > 1) e.preventDefault(); }, {passive:false});
 
 function setThemeColor(c){document.getElementById('theme-color').setAttribute('content',c);}
-function openDrawer(){document.getElementById('drawer').classList.add('open');document.getElementById('drawer-bg').classList.add('open');setThemeColor(params.bgColor);}
-function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawer-bg').classList.remove('open');setThemeColor(params.bgColor);}
+function openDrawer(){document.getElementById('drawer').classList.add('open');document.getElementById('drawer-bg').classList.add('open');setThemeColor(BG);}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawer-bg').classList.remove('open');setThemeColor(BG);}
 
 // ── Helpers ────────────────────────────────────────────────────
 function hex3(h){return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];}
@@ -648,15 +639,7 @@ function hex3(h){return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),pars
 // ── UI ─────────────────────────────────────────────────────────
 function sp(k,v,l){params[k]=v;document.getElementById(l).textContent=v;inst.rebuild();}
 function st(k,v){params[k]=v;inst.redraw();}
-function sc(k,v,l){
-    params[k]=v;document.getElementById(l).textContent=v;
-    if(k==='bgColor'){
-        document.body.style.background=v;
-        document.getElementById('app').style.background=v;
-        setThemeColor(v);
-    }
-    inst.redraw();
-}
+
 function applySeed(){const v=parseInt(document.getElementById('seed-input').value);if(v>0){params.seed=v;inst.rebuild();}}
 function prevSeed(){params.seed=Math.max(1,params.seed-1);sync();inst.rebuild();}
 function nextSeed(){params.seed++;sync();inst.rebuild();}
@@ -668,9 +651,7 @@ function resetAll(){
     document.getElementById('sl-inner').value=params.innerCells;document.getElementById('lv-inner').textContent=params.innerCells;
     document.getElementById('chk-sol').checked=params.showSolution;
     document.getElementById('chk-trail').checked=params.showTrail;
-    document.getElementById('c-bg').value=params.bgColor;document.getElementById('cv-bg').textContent=params.bgColor;document.body.style.background=params.bgColor;document.getElementById('app').style.background=params.bgColor;setThemeColor(params.bgColor);
-    document.getElementById('c-wall').value=params.wallColor;document.getElementById('cv-wall').textContent=params.wallColor;
-    document.getElementById('c-path').value=params.pathColor;document.getElementById('cv-path').textContent=params.pathColor;
+
     ['easy','medium','hard'].forEach(x=>document.getElementById('diff-'+x).classList.toggle('active',x===params.difficulty));
     inst.rebuild();
 }
