@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" id="theme-color" content="#faf9f5">
 <title>Circular Maze</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
@@ -611,7 +612,7 @@ const sketch=p=>{
         {
             const[px,py]=posToXY(player,counts,radii,hubR,cx,cy);
             const ringH=player.hub?hubR*0.55:(radii[player.r+1]-radii[player.r])*0.38;
-            const ballR=Math.min(Math.max(2,Math.min(ringH,maxR/rings*0.32)), hubR*0.72);
+            const ballR=Math.max(2,hubR*10/n);
             p.noStroke();
             p.fill(pR,pG,pB,40);p.circle(px,py,ballR*4);
             p.fill(pR,pG,pB,80);p.circle(px,py,ballR*2.8);
@@ -636,6 +637,7 @@ document.addEventListener('gesturechange', e => e.preventDefault());
 document.addEventListener('gestureend',    e => e.preventDefault());
 document.addEventListener('touchmove', e => { if(e.touches.length > 1) e.preventDefault(); }, {passive:false});
 
+function setThemeColor(c){document.getElementById('theme-color').setAttribute('content',c);}
 function openDrawer(){document.getElementById('drawer').classList.add('open');document.getElementById('drawer-bg').classList.add('open');}
 function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawer-bg').classList.remove('open');}
 
@@ -650,6 +652,7 @@ function sc(k,v,l){
     if(k==='bgColor'){
         document.body.style.background=v;
         document.getElementById('app').style.background=v;
+        setThemeColor(v);
     }
     inst.redraw();
 }
@@ -664,7 +667,7 @@ function resetAll(){
     document.getElementById('sl-inner').value=params.innerCells;document.getElementById('lv-inner').textContent=params.innerCells;
     document.getElementById('chk-sol').checked=params.showSolution;
     document.getElementById('chk-trail').checked=params.showTrail;
-    document.getElementById('c-bg').value=params.bgColor;document.getElementById('cv-bg').textContent=params.bgColor;document.body.style.background=params.bgColor;document.getElementById('app').style.background=params.bgColor;
+    document.getElementById('c-bg').value=params.bgColor;document.getElementById('cv-bg').textContent=params.bgColor;document.body.style.background=params.bgColor;document.getElementById('app').style.background=params.bgColor;setThemeColor(params.bgColor);
     document.getElementById('c-wall').value=params.wallColor;document.getElementById('cv-wall').textContent=params.wallColor;
     document.getElementById('c-path').value=params.pathColor;document.getElementById('cv-path').textContent=params.pathColor;
     ['easy','medium','hard'].forEach(x=>document.getElementById('diff-'+x).classList.toggle('active',x===params.difficulty));
