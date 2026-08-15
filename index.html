@@ -611,7 +611,7 @@ const sketch=p=>{
         // ── Player ──
         {
             const[px,py]=posToXY(player,counts,radii,hubR,cx,cy);
-            const ballR=Math.max(2, hubR*5/params.innerCells);
+            const ballR=Math.max(2, hubR*Math.PI/params.innerCells);
             p.noStroke();
             p.fill(pR,pG,pB,40);p.circle(px,py,ballR*4);
             p.fill(pR,pG,pB,80);p.circle(px,py,ballR*2.8);
