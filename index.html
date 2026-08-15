@@ -26,15 +26,17 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',s
 #dpad button:active,#dpad button.pressed{background:var(--or);color:#fff}
 #dpad .center{display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mid)}
 
-/* ── Short screens (landscape phone, small window) ── */
-@media (max-height: 500px) {
-  #topbar{padding:3px 10px 0}
+/* ── Landscape: dpad moves to the right, maze fills left ── */
+@media (orientation:landscape) and (max-height:600px) {
+  #app{flex-direction:row;flex-wrap:wrap}
+  #topbar{width:100%;order:0;padding:4px 12px 0}
   #topbar h1{font-size:13px}
   .icon-btn{font-size:16px;padding:3px}
-  #status-msg{height:14px;font-size:11px;padding:0}
-  #bottom{padding:4px 12px calc(4px + var(--safe-bottom));gap:3px}
-  #dpad{grid-template-columns:repeat(3,40px);grid-template-rows:repeat(3,40px);gap:3px}
-  #dpad button{width:40px;height:40px;font-size:16px;border-radius:8px}
+  #status-msg{width:100%;order:1;height:14px;font-size:11px;padding:0}
+  #maze-wrap{order:2;flex:1;min-width:0;padding:4px 4px 4px 8px;align-self:stretch}
+  #bottom{order:3;width:auto;flex-shrink:0;border-top:none;border-left:1px solid var(--lg);padding:8px 12px calc(8px + var(--safe-bottom));justify-content:center;align-self:stretch}
+  #dpad{grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:4px}
+  #dpad button{width:44px;height:44px;font-size:18px;border-radius:10px}
   .hint{font-size:9px}
 }
 
@@ -393,11 +395,18 @@ const sketch=p=>{
     };
 
     function csize(){
-        const w=window.innerWidth-16;
-        const bottomH=document.getElementById('bottom').getBoundingClientRect().height||130;
-        const topH=document.getElementById('topbar').getBoundingClientRect().height+20+16;
-        const h=window.innerHeight-topH-bottomH-8;
-        return Math.floor(Math.min(w,h,600));
+        const landscape = window.innerWidth > window.innerHeight && window.innerHeight < 600;
+        if(landscape){
+            const bottomW = document.getElementById('bottom').getBoundingClientRect().width || 160;
+            const topH = document.getElementById('topbar').getBoundingClientRect().height + 14;
+            const availW = window.innerWidth - bottomW - 16;
+            const availH = window.innerHeight - topH - 8;
+            return Math.floor(Math.min(availW, availH, 600));
+        }
+        const bottomH = document.getElementById('bottom').getBoundingClientRect().height || 130;
+        const topH = document.getElementById('topbar').getBoundingClientRect().height + 20 + 16;
+        const h = window.innerHeight - topH - bottomH - 8;
+        return Math.floor(Math.min(window.innerWidth - 16, h, 600));
     }
 
     function rebuild(){
