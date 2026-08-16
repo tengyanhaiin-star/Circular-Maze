@@ -29,12 +29,12 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Roboto',
 
 /* ── Landscape: dpad moves to the right, maze fills left ── */
 @media (orientation:landscape) and (max-height:600px) {
-  #app{flex-direction:row;flex-wrap:wrap}
+  #app{flex-direction:row;flex-wrap:wrap;padding:0}
   #topbar{width:100%;order:0;padding:4px 12px 0}
   #topbar h1{font-size:13px}
   .icon-btn{font-size:16px;padding:3px}
   #status-msg{width:100%;order:1;height:14px;font-size:11px;padding:0}
-  #maze-wrap{order:2;flex:1;min-width:0;padding:4px 4px 4px 8px;align-self:stretch}
+  #maze-wrap{order:2;flex:1;min-width:0;padding:0;align-self:stretch}
   #bottom{order:3;width:auto;flex-shrink:0;border-top:none;border-left:1px solid var(--lg);padding:8px 12px calc(8px + var(--safe-bottom));justify-content:center;align-self:stretch}
   #dpad{grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:4px}
   #dpad button{width:44px;height:44px;font-size:18px;border-radius:10px}
@@ -399,8 +399,8 @@ const sketch=p=>{
         if(landscape){
             const bottomW = document.getElementById('bottom').getBoundingClientRect().width || 160;
             const topH = (document.getElementById('topbar').getBoundingClientRect().height || 44) + 14;
-            const availW = window.innerWidth - bottomW - 16;
-            const availH = window.innerHeight - topH - 8;
+            const availW = window.innerWidth - bottomW;
+            const availH = window.innerHeight - topH;
             return Math.max(60, Math.floor(Math.min(availW, availH, 600)));
         }
         const bottomH = document.getElementById('bottom').getBoundingClientRect().height || 130;
