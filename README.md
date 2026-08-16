@@ -55,7 +55,6 @@ Open the settings drawer with the ⚙️ button (top right).
 | **Sectors** | Number of angular divisions per ring (4–30, even numbers). More sectors = denser maze. |
 | **Show Solution** | Highlights the shortest path from center to exit (BFS). Hidden in fogged areas. |
 | **Show Trail** | Draws a line through every cell you have visited, in order. Hidden in fogged areas. |
-| **Background / Walls / Player** | Color pickers for full visual customization. |
 
 ---
 
@@ -67,7 +66,7 @@ Open the settings drawer with the ⚙️ button (top right).
 - **Arc rendering** — all arcs are drawn as polylines (`beginShape/vertex`) rather than `p5.arc()`, avoiding fill artifacts.
 - **Trail and solution curves** — same-ring segments are drawn as circular arcs at the ring's mid-radius; cross-ring segments are straight radial lines.
 - **Mobile** — touch events use `touchstart` + `preventDefault` to avoid double-firing and iOS fullscreen gestures. Layout uses `100dvh` and `safe-area-inset-bottom` for iPhone notch/home-bar compatibility.
-- **Fonts** — Inter, Courier Prime (Google Fonts).
+- **Font** — [Roboto](https://fonts.google.com/specimen/Roboto) (Google Fonts).
 
 ---
 
@@ -76,6 +75,8 @@ Open the settings drawer with the ⚙️ button (top right).
 Open the [Circular Maze](https://tengyanhaiin-star.github.io/Circular-Maze/) in any browser, no server needed.
 
 To share a specific maze, note the seed number and send it.
+
+---
 
 ## License
 
