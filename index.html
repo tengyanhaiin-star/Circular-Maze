@@ -369,11 +369,16 @@ const sketch=p=>{
 
     p.setup=()=>{
         const sz=csize();
-        const cv=p.createCanvas(sz,sz);
+        const cv=p.createCanvas(Math.max(sz,100),Math.max(sz,100));
         cv.parent('cc');
         cv.elt.setAttribute('tabindex','0');
         p.noLoop();
         rebuild();
+        // Re-check size after layout settles
+        requestAnimationFrame(()=>{
+            const sz2=csize();
+            if(Math.abs(sz2-sz)>4){p.resizeCanvas(sz2,sz2);p.redraw();}
+        });
     };
 
     p.windowResized=()=>{p.resizeCanvas(csize(),csize());p.redraw();};
@@ -391,15 +396,15 @@ const sketch=p=>{
         const landscape = window.innerWidth > window.innerHeight && window.innerHeight < 600;
         if(landscape){
             const bottomW = document.getElementById('bottom').getBoundingClientRect().width || 160;
-            const topH = document.getElementById('topbar').getBoundingClientRect().height + 14;
+            const topH = (document.getElementById('topbar').getBoundingClientRect().height || 44) + 14;
             const availW = window.innerWidth - bottomW - 16;
             const availH = window.innerHeight - topH - 8;
-            return Math.floor(Math.min(availW, availH, 600));
+            return Math.max(60, Math.floor(Math.min(availW, availH, 600)));
         }
         const bottomH = document.getElementById('bottom').getBoundingClientRect().height || 130;
-        const topH = document.getElementById('topbar').getBoundingClientRect().height + 20 + 16;
+        const topH = (document.getElementById('topbar').getBoundingClientRect().height || 44) + 20 + 16;
         const h = window.innerHeight - topH - bottomH - 8;
-        return Math.floor(Math.min(window.innerWidth - 16, h, 600));
+        return Math.max(60, Math.floor(Math.min(window.innerWidth - 16, h, 600)));
     }
 
     function rebuild(){
@@ -615,7 +620,7 @@ const sketch=p=>{
 
     p.rebuild=rebuild;
 };
-inst=new p5(sketch);
+document.addEventListener('DOMContentLoaded', ()=>{ inst=new p5(sketch); });
 
 function setDiff(d){
     params.difficulty=d;
