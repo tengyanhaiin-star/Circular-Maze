@@ -8,7 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#faf9f5;--sur:#ffffff;--dark:#141413;--mid:#b0aea5;--lg:#e8e6dc;--or:#d97757;--safe-bottom:env(safe-area-inset-bottom,0px)}
+:root{--bg:#faf9f5;--sur:#faf9f5;--dark:#141413;--mid:#b0aea5;--lg:#e8e6dc;--or:#d97757;--safe-bottom:env(safe-area-inset-bottom,0px)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Roboto',sans-serif;color:var(--dark)}
 
@@ -26,20 +26,6 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Roboto',
 #dpad button{width:56px;height:56px;padding:0;font-size:22px;border:none;border-radius:12px;background:var(--lg);color:var(--dark);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .1s;-webkit-user-select:none;touch-action:manipulation}
 #dpad button:active,#dpad button.pressed{background:var(--or);color:#fff}
 #dpad .center{display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mid)}
-
-/* ── Landscape: dpad moves to the right, maze fills left ── */
-@media (orientation:landscape) and (max-height:600px) {
-  #app{flex-direction:row;flex-wrap:wrap;padding:0}
-  #topbar{width:100%;order:0;padding:4px 12px 0}
-  #topbar h1{font-size:13px}
-  .icon-btn{font-size:16px;padding:3px}
-  #status-msg{width:100%;order:1;height:14px;font-size:11px;padding:0}
-  #maze-wrap{order:2;flex:1;min-width:0;padding:0;align-self:stretch}
-  #bottom{order:3;width:auto;flex-shrink:0;border-top:none;border-left:1px solid var(--lg);padding:8px 12px calc(8px + var(--safe-bottom));justify-content:center;align-self:stretch}
-  #dpad{grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:4px}
-  #dpad button{width:44px;height:44px;font-size:18px;border-radius:10px}
-  .hint{font-size:9px}
-}
 
 /* ── Top bar ── */
 #topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 0;flex-shrink:0}
@@ -89,6 +75,20 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;background:var(--or);
 .diff-btn.active{border-color:var(--or);background:var(--or);color:#fff}
 .diff-btn .emoji{font-size:18px;display:block;margin-bottom:3px}
 .hint{font-size:13px;color:var(--mid);text-align:center}
+
+/* ── Landscape: dpad moves to right, maze fills left ── */
+@media (orientation:landscape) and (max-height:600px) {
+  #app{flex-direction:row;flex-wrap:wrap}
+  #topbar{width:100%;order:0;padding:4px 12px 0}
+  #topbar h1{font-size:13px}
+  .icon-btn{font-size:16px;padding:3px}
+  #status-msg{width:100%;order:1;height:14px;font-size:11px;padding:0}
+  #maze-wrap{order:2;flex:1;min-width:0;padding:4px 4px 4px 8px;align-self:stretch}
+  #bottom{order:3;width:auto;flex-shrink:0;border-top:none;border-left:1px solid var(--lg);padding:8px 12px calc(8px + var(--safe-bottom));justify-content:center;align-self:stretch}
+  #dpad{grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:4px}
+  #dpad button{width:44px;height:44px;font-size:18px;border-radius:10px}
+  .hint{font-size:9px}
+}
 </style>
 </head>
 <body>
@@ -399,8 +399,8 @@ const sketch=p=>{
         if(landscape){
             const bottomW = document.getElementById('bottom').getBoundingClientRect().width || 160;
             const topH = (document.getElementById('topbar').getBoundingClientRect().height || 44) + 14;
-            const availW = window.innerWidth - bottomW;
-            const availH = window.innerHeight - topH;
+            const availW = window.innerWidth - bottomW - 16;
+            const availH = window.innerHeight - topH - 8;
             return Math.max(60, Math.floor(Math.min(availW, availH, 600)));
         }
         const bottomH = document.getElementById('bottom').getBoundingClientRect().height || 130;
