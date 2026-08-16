@@ -376,8 +376,10 @@ const sketch=p=>{
         rebuild();
         // Re-check size after layout settles
         requestAnimationFrame(()=>{
-            const sz2=csize();
-            if(Math.abs(sz2-sz)>4){p.resizeCanvas(sz2,sz2);p.redraw();}
+            requestAnimationFrame(()=>{
+                const sz2=csize();
+                if(Math.abs(sz2-sz)>4){p.resizeCanvas(sz2,sz2);p.redraw();}
+            });
         });
     };
 
@@ -620,7 +622,23 @@ const sketch=p=>{
 
     p.rebuild=rebuild;
 };
-document.addEventListener('DOMContentLoaded', ()=>{ inst=new p5(sketch); });
+document.addEventListener('DOMContentLoaded', ()=>{
+    // Wait for fonts + layout to fully settle before starting p5
+    // (especially important on iOS Safari where layout is delayed)
+    const start = () => {
+        // Double rAF ensures paint + layout are both complete
+        requestAnimationFrame(()=>{
+            requestAnimationFrame(()=>{
+                inst = new p5(sketch);
+            });
+        });
+    };
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(start);
+    } else {
+        start();
+    }
+});
 
 function setDiff(d){
     params.difficulty=d;
